@@ -1,0 +1,470 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+#hmbBtm {
+    width: 70px;
+    height: 70px;
+    background-color: rgb(43, 43, 43);
+    cursor: pointer;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    border-radius: 20px;
+    z-index: 60;
+
+    display: flex;                /* ← Flexboxで中央配置 */
+    flex-direction: column;      /* ← 縦並び */
+    justify-content: center;     /* ← 縦方向に中央 */
+    align-items: center;         /* ← 横方向にも中央 */
+    gap: 8px;                   /* ← 線の間隔 */
+    transition: .4s;
+}
+
+#hmbBtm:hover {
+    background-color: #129990;
+}
+
+#hmbBtm span {
+    background-color: #fff;
+    width: 25px;
+    height: 2px;
+    display: block;
+    position: relative;
+    border-radius: 1px;
+    transition: all .4s;
+}
+
+/* ハンバーガーがアクティブになったとき */
+#hmbBtm.active span:nth-child(1) {
+    top: 10px;
+    transform: rotate(45deg);
+}
+
+#hmbBtm.active span:nth-child(2) {
+    opacity: 0;
+    transition: all 0;
+}
+
+#hmbBtm.active span:nth-child(3) {
+    bottom: 10px;
+    transform: rotate(-45deg);
+}
+
+/* #hmbBtm span:first-child {top: 12px; left: 12px;}
+#hmbBtm span:nth-child(2) {top: 32px;}
+#hmbBtm span:last-child {top: 12px;} */
+
+#nav {
+    opacity: 0;
+    /* visibility: hidden;  今回はアニメーションの邪魔をしていたからpointer-events: none;を使う*/
+    pointer-events: none; /* ← クリック不能に */
+    display: block;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    overflow: auto; /* 必要に応じてスクロールを表示 */
+    width: 570px;
+    transform: translateX(100%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    /* transition:all .4s; */
+}
+
+#nav.active {
+    opacity: 1;
+    transform: translateX(0);
+    /* visibility: visible;  visibility: hidden;を使わなくなったからいらない*/
+    pointer-events: auto; /* クリックできるように */
+}
+
+#nav .language {
+    margin: 5em 6em 2em;
+    color: #129990;
+    cursor: pointer;
+}
+
+#nav .language svg {
+    width: 14px;
+    height: 24px;
+    color: #000000;
+    transform: translateY(8px);
+}
+
+#nav ul {
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: aqua;
+}
+
+#nav a {
+    display: inline-block;
+    padding: 2rem;
+    width: 20px;
+    background-color: #ffffff;
+}
+
+.top-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.top-page.active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 50;
+}
+
+/* ラッパー：見える範囲を制限 */
+.background-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden; /* はみ出した分を非表示に */
+}
+
+/* 背景：ズーム用 */
+.background {
+    height: 100%;
+    width: 100%;
+    background-image: url(/images/AdobeStock_505715119_Preview.jpeg);
+    background-position: center;
+    background-size: cover;
+    transform: scale(1.2); /* 最初は拡大 */
+    transition: transform 1s ease;
+}
+
+/* ぼかし背景 */
+.background .blur-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(7px);
+    background-color: rgb(0, 0, 0, .3);
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .4s;
+}
+
+.top-page h1 {
+    z-index: 30;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: "Kanit", sans-serif;
+    transition: all .5s;
+    transform: scale(.8);
+    opacity: 0;
+
+}
+
+.top-page span {
+    color: rgb(255, 187, 0);
+    text-shadow: 5px 5px 2px rgba(0, 0, 0, .6);
+    transform: rotate(-18deg) translateX(80px) translateY(-10px) scale(.8);
+    display: inline-block;
+    font-family: "Caveat", cursive;
+    font-size: 8rem;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+
+.main-visual {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* メニューの背後で触れなくしたい場合は追加 */
+}
+
+.main-visual img {
+    width: 75rem;
+    height: 35rem;
+    display: block;
+    border: 4px solid rgb(255, 187, 0);
+    border-radius: 8px;
+    transition: all .5s;
+    transform: scale(.8);
+    opacity: 0;
+}
+
+.link {
+    position: relative;
+    margin: 120px 0;
+}
+
+.link img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-100px);
+    width: 300px;
+    z-index: 40;
+}
+
+.link .row {
+  display: flex;
+  justify-content: center; /* 中央揃えにした方が綺麗 */
+  gap: 20px; /* 間隔を明示的に指定 */
+  flex-wrap: wrap; /* スマホ対応 */
+}
+
+.link a {
+    background-color: #eeeeee;
+    color: #129990;
+    width: 200px;     /* 幅固定 */
+    height: 120px;     /* 高さ固定 */
+    display: flex;
+    flex-direction: column; /* 縦並びにする */
+    align-items: center;     /* 中央揃えにする */
+    text-align: center;
+    font-size: 16px;
+    font-weight:600;
+    letter-spacing: .2em;
+    border-radius: 8px;
+    transition: 0.3s;
+    z-index: 50;
+}
+.link a:hover {
+    background-color: #129990;
+    transform: scale(1.1);
+    color: #fff;
+}
+
+.link span {
+    margin-top: 30px;
+}
+
+.link svg {
+    width: 30px;
+    height: 30px;
+    margin-top: 16px;
+    transform: rotate(180deg);
+}
+
+.section1 {
+    position: relative;
+    margin: 10px;
+    padding: 100px 0 30px 0;
+    background-color: #129990;
+    border-radius: 4%;
+}
+
+.number {
+    font-size: 5rem;
+    font-weight: 700;
+}
+.number span {
+    font-size: 10rem;
+    color: yellow;
+}
+
+/* .section1 h2 {
+    position: relative;
+    top: 100px;
+    left: 100px;
+} */
+
+.text-box {
+    position: absolute;
+    padding: 50px 80px;
+}
+
+.text1 {
+    font-size: 18px;
+    font-weight: 700;
+    background-color: #000;
+    color: #fff;
+    width: fit-content; /* 背景を文字に合わせたい場合は追加 */
+    padding: .3em .5em; /* 任意で余白 */
+    margin-bottom: 0.5em; /* 間隔用 */
+    z-index: 20;
+}
+
+.text2 {
+    font-size: 2rem;
+    font-weight: 700;
+    background-color: #fff;
+    color: #0f0f0f;
+    width: fit-content;
+    width: fit-content; /* 背景を文字に合わせたい場合は追加 */
+    padding: .3em .5em; /* 任意で余白 */
+    z-index: 20;
+}
+
+.section1 .column {
+    margin: 100px;
+}
+
+.column img {
+    object-fit: cover;
+    width: 100%;
+    height: 550px;
+    border: 2px solid #000;
+}
+
+.bottom-img {
+    position: absolute;  
+    height: 250px;
+    width: 300px;
+}
+
+.text-area {
+    margin-top: 100px;
+}
+
+.text-area h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+hr {
+    border: 2px solid yellow;
+    width: 200px;
+    margin-top: 1em;
+}
+
+.text-area p {
+    color: #fff;
+    font-size: 18px;
+    font: 500;
+    margin-top: 1.5em;
+    line-height: 1.8em;
+    letter-spacing: .2em;
+}
+
+/* オートキャンプ */
+.section2 {
+    position: relative;
+    margin: 10px;
+    padding: 100px 0 30px 0;
+    background-color: #fda982;
+    border-radius: 4%;
+}
+
+.section2 .column {
+    margin: 100px;
+}
+
+.section3 {
+    position: relative;
+    margin: 10px;
+    padding: 100px 0 30px 0;
+    background-color: #ebebeb;
+    border-radius: 4%;
+}
+
+.section3 h2{
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 24px;
+    letter-spacing: .2em;
+}
+
+.section3 .text {
+    margin: 1.5em 0;
+    font-size: 12px;
+    text-align: center;
+}
+
+.section3 .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.section3 .top-table {
+    background-color: #000000;
+    color: #fff;width: 300px;
+    border: 1px solid #000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 2rem 2.8rem;
+    text-align: center;
+}
+
+.section3 .table {
+    width: 300px;
+    border: 1px solid #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 2rem 2.8rem;
+    text-align: center;
+}
+
+.section3 .plus {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+}
+
+.section3 .table-full {
+    width: 900px;
+    border: 1px solid #000;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 2rem 2.8rem;
+    text-align: center;
+}
+
+.section4 {
+    position: relative;
+    margin: 10px;
+    padding: 100px 0 30px 0;
+    background-color: #fda982;
+    border-radius: 4%;
+    height: 100vh;
+}
+
+.section4 .text {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.section4 .title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
