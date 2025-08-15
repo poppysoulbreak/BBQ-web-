@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BBQ</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
@@ -136,30 +135,56 @@
 
         </section>
 
-        <!-- 料金 -->
+        <!-- 料金セクション -->
         <section id="price" class="price">
             <div class="price-list">
                 <h2>ご利用料金</h2>
                 <p>(税込み表記)</p>
 
-                <!-- 1つ目のテーブル（入場料） -->
                 <table class="price-table">
-                    <tr>
-                        <th>入場料</th>
-                        <td>大人 2040円／人</td>
-                        <td>高校生 1620円／人</td>
-                        <td>中・小学生 1000円／人</td>
-                    </tr>
+                    <!-- theadとtbodyで構造を明確化する -->
+                    <thead>
+                        <tr>
+                            <th>入場料</th>
+                            <!-- PCでしか表示されない見出しは、スマホでは非表示にする -->
+                            <th class="pc-only">大人</th>
+                            <th class="pc-only">高校生</th>
+                            <th class="pc-only">中・小学生</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <!-- スマホ用に<th>で見出しを設定し、PCでは非表示にする -->
+                            <th class="sp-only">大人</th>
+                            <td data-label="入場料（大人）">2040円／人</td>
+                            <!-- 以下のtdも同様にdata-labelを追加していく -->
+                        </tr>
+                        <tr>
+                            <th class="sp-only">高校生</th>
+                            <td data-label="入場料（高校生）">1620円／人</td>
+                        </tr>
+                        <tr>
+                            <th class="sp-only">中・小学生</th>
+                            <td data-label="入場料（中・小学生）">1000円／人</td>
+                        </tr>
+                    </tbody>
                 </table>
 
                 <div class="plus-icon">+</div>
 
-                <!-- 2つ目のテーブル（BBQ台利用料金） -->
                 <table class="price-table">
-                    <tr>
-                        <th>BBQ台利用料金</th>
-                        <td>5,500円／台</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>BBQ台利用料金</th>
+                            <!-- <th class="pc-only">料金</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="sp-only">BBQ台利用料金</th>
+                            <td data-label="BBQ台利用料金">5,500円／台</td>
+                        </tr>
+                    </tbody>
                 </table>
                 
                 <p>(ご利用する場合のみ)</p>
@@ -175,90 +200,90 @@
              <div class="menu_list">
                 <div class="container">
                     <div class="row">
-                    <!-- レギュラー -->
-                    <div class="column">
-                        <img src="./images/oniku.png" alt="お肉レギュラーセット">
-                        <div class="menu-items">
-                            <h3>レギュラーセット</h3>
-                            <ul class="food-list">
-                                <li>国産黒毛和牛 120g</li>
-                                <li>豚ロース肉 80g</li>
-                                <li>鶏肉 80g</li>
-                                <li>ウィンナー 2本</li>
-                                <li>野菜</li>
-                                <li>おにぎり 1個</li>
-                                <li>焼肉のタレ</li>
-                                <li>紙皿、割り箸</li>
-                            </ul>
-                            <hr>
-                            <p class="price-one">1人前 <span>3,200円</span></p>
+                        <!-- レギュラー -->
+                        <div class="column">
+                            <img src="./images/oniku.png" alt="お肉レギュラーセット">
+                            <div class="menu-items">
+                                <h3>レギュラーセット</h3>
+                                <ul class="food-list">
+                                    <li>国産黒毛和牛 120g</li>
+                                    <li>豚ロース肉 80g</li>
+                                    <li>鶏肉 80g</li>
+                                    <li>ウィンナー 2本</li>
+                                    <li>野菜</li>
+                                    <li>おにぎり 1個</li>
+                                    <li>焼肉のタレ</li>
+                                    <li>紙皿、割り箸</li>
+                                </ul>
+                                <hr>
+                                <p class="price-one">1人前 <span>3,200円</span></p>
+                            </div>
+                        </div>
+
+                        <!-- 大盛 -->
+                        <div class="column">
+                            <img src="./images/oniku.png" alt="お肉大盛セット">
+                            <div class="menu-items">
+                                <h3>大盛セット</h3>
+                                <ul class="food-list">
+                                    <li>国産黒毛和牛 480g</li>
+                                    <li>豚ロース肉 320g</li>
+                                    <li>鶏肉 320g</li>
+                                    <li>ウィンナー 8本</li>
+                                    <li>野菜</li>
+                                    <li>おにぎり 4個</li>
+                                    <li>焼肉のタレ</li>
+                                    <li>紙皿、割り箸</li>
+                                </ul>
+                                <hr>
+                                <p>1人前 <span>8,900円</span></p>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <img src="./images/oniku.png" alt="お肉レギュラーセット">
+                            <div class="menu-items">
+                                <h3>レギュラーセット ＋ 海鮮</h3>
+                                <ul class="food-list">
+                                    <li>国産黒毛和牛 120g</li>
+                                    <li>豚ロース肉 80g</li>
+                                    <li>鶏肉 80g</li>
+                                    <li>ウィンナー 2本</li>
+                                    <li>ホタテ1個</li>
+                                    <li>エビ2切れ</li>
+                                    <li>エビ4尾</li>
+                                    <li>野菜</li>
+                                    <li>おにぎり 1個</li>
+                                    <li>焼肉のタレ</li>
+                                    <li>紙皿、割り箸</li>
+                                </ul>
+                                <hr>
+                                <p class="price-one">1人前 <span>6,000円</span></p>
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            <img src="./images/oniku.png" alt="お肉レギュラーセット">
+                            <div class="menu-items">
+                                <h3>大盛セット ＋ 海鮮</h3>
+                                <ul class="food-list">
+                                    <li>国産黒毛和牛 480g</li>
+                                    <li>豚ロース肉 320g</li>
+                                    <li>鶏肉 320g</li>
+                                    <li>ウィンナー 8本</li>
+                                    <li>ホタテ4個</li>
+                                    <li>エビ4切れ</li>
+                                    <li>エビ8尾</li>
+                                    <li>野菜</li>
+                                    <li>おにぎり 4個</li>
+                                    <li>焼肉のタレ</li>
+                                    <li>紙皿、割り箸</li>
+                                </ul>
+                                <hr>
+                                <p class="price-one">1人前 <span>10,000円</span></p>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- 大盛 -->
-                    <div class="column">
-                        <img src="./images/oniku.png" alt="お肉大盛セット">
-                        <div class="menu-items">
-                            <h3>大盛セット</h3>
-                            <ul class="food-list">
-                                <li>国産黒毛和牛 480g</li>
-                                <li>豚ロース肉 320g</li>
-                                <li>鶏肉 320g</li>
-                                <li>ウィンナー 8本</li>
-                                <li>野菜</li>
-                                <li>おにぎり 4個</li>
-                                <li>焼肉のタレ</li>
-                                <li>紙皿、割り箸</li>
-                            </ul>
-                            <hr>
-                            <p>1人前 <span>8,900円</span></p>
-                        </div>
-                     </div>
-
-                     <div class="column">
-                        <img src="./images/oniku.png" alt="お肉レギュラーセット">
-                        <div class="menu-items">
-                            <h3>レギュラーセット ＋ 海鮮</h3>
-                            <ul class="food-list">
-                                <li>国産黒毛和牛 120g</li>
-                                <li>豚ロース肉 80g</li>
-                                <li>鶏肉 80g</li>
-                                <li>ウィンナー 2本</li>
-                                <li>ホタテ1個</li>
-                                <li>エビ2切れ</li>
-                                <li>エビ4尾</li>
-                                <li>野菜</li>
-                                <li>おにぎり 1個</li>
-                                <li>焼肉のタレ</li>
-                                <li>紙皿、割り箸</li>
-                            </ul>
-                            <hr>
-                            <p class="price-one">1人前 <span>6,000円</span></p>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <img src="./images/oniku.png" alt="お肉レギュラーセット">
-                        <div class="menu-items">
-                            <h3>大盛セット ＋ 海鮮</h3>
-                            <ul class="food-list">
-                                <li>国産黒毛和牛 480g</li>
-                                <li>豚ロース肉 320g</li>
-                                <li>鶏肉 320g</li>
-                                <li>ウィンナー 8本</li>
-                                <li>ホタテ4個</li>
-                                <li>エビ4切れ</li>
-                                <li>エビ8尾</li>
-                                <li>野菜</li>
-                                <li>おにぎり 4個</li>
-                                <li>焼肉のタレ</li>
-                                <li>紙皿、割り箸</li>
-                            </ul>
-                            <hr>
-                            <p class="price-one">1人前 <span>10,000円</span></p>
-                        </div>
-                    </div>
-                </div>
                 </div>
              </div>
 
